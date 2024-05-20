@@ -12,5 +12,25 @@ class MilkController extends Controller
         $milk = Product::find(1);
         dd($milk);
     }
+
+    public function create()
+    {
+        $milkArr = [
+            [
+                'name' => 'lightMilk',
+                'fabric' => 'Vkusnoteevo',
+                'price' => 50,
+            ],
+            [
+                'name' => 'heavyMilk',
+                'fabric' => 'Korenovka',
+                'price' => 75,
+            ],
+        ];
+        foreach ($milkArr as $item) {
+            Product::create($item);
+        }
+        dd('milk created succesfully');
+    }
     //
 }

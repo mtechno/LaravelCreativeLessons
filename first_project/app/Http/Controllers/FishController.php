@@ -23,8 +23,30 @@ class FishController extends Controller
 //        return 'FISHHHHHH';
 
         $fish = Product::find(1);
+        echo $fish->name;
         dd($fish);
 
+    }
+
+    public function create()
+    {
+        $fishArr = [
+            [
+                'name' => 'treskaFish',
+                'fabric' => 'MurmanskTralFlot',
+                'price' => 100,
+            ],
+            [
+                'name' => 'pikshaFish',
+                'fabric' => 'MurmanskTralFlot',
+                'price' => 88,
+            ],
+        ];
+        foreach($fishArr as $fishItem)
+        {
+            Product::create($fishItem);
+        }
+        dd('fish created successfully');
     }
     //
 }

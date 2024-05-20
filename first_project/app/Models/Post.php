@@ -11,4 +11,5 @@ class Post extends Model
 
     public $someProperty;
     protected $table = 'posts'; //name of table
+    protected $guarded = []; //can creating in DB
 }
