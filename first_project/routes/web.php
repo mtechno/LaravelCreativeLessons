@@ -34,5 +34,6 @@ Route::get('/water', [WaterController::class, 'index']);
 Route::get('/water/create', [WaterController::class, 'create']);
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/create', [PostController::class, 'create']);
+Route::get('/posts/update', [PostController::class, 'update']);
 
 

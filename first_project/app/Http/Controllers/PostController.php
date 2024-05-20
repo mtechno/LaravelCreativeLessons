@@ -46,5 +46,20 @@ class PostController extends Controller
         }
         dd('posts created succesfully');
     }
+
+    public function update()
+    {
+        $post = Post::find(6);
+        $post->update([
+           'title' => 'updated',
+           'content' => 'updated',
+           'image' => 'updated',
+           'likes' => 110000,
+           'is_published' => 0,
+        ]);
+
+        dd('posts updated succesfully');
+
+    }
     //
 }
