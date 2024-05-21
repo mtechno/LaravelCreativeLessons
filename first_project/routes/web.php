@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\{
+use App\Http\Controllers\{AboutController,
+    ContactsController,
     FishController,
     KolbasaController,
     KrossovkiController,
     LekarstvaController,
+    MainController,
     MilkController,
     WaterController,
     MyPlaceController,
     FlakesController,
-    PostController
-};
+    PostController};
 // use Illuminate\Support\Facades\Route;
 
 
@@ -32,11 +33,15 @@ Route::get('/lekarstva', [LekarstvaController::class, 'index']);
 Route::get('/lekarstva/create', [LekarstvaController::class, 'create']);
 Route::get('/water', [WaterController::class, 'index']);
 Route::get('/water/create', [WaterController::class, 'create']);
-Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [PostController::class, 'create']);
 Route::get('/posts/update', [PostController::class, 'update']);
 Route::get('/posts/delete', [PostController::class, 'delete']);
 Route::get('/posts/first_or_create', [PostController::class, 'firstOrCreate']);
 Route::get('/posts/update_or_create', [PostController::class, 'updateOrCreate']);
+
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
+Route::get('/main', [MainController::class, 'index'])->name('main.index');
 
 
