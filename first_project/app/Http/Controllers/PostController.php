@@ -61,5 +61,19 @@ class PostController extends Controller
         dd('posts updated succesfully');
 
     }
+
+    public function delete()
+    {
+        $post = Post::withTrashed()->find(2);
+        $post->restore();
+//        $post->delete([
+//            'title' => 'updated',
+//            'content' => 'updated',
+//            'image' => 'updated',
+//            'likes' => 110000,
+//            'is_published' => 0,
+//        ]);
+        dd('posts deleted succesfully');
+    }
     //
 }
