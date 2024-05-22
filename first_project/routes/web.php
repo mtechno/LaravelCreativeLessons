@@ -33,8 +33,16 @@ Route::get('/lekarstva', [LekarstvaController::class, 'index']);
 Route::get('/lekarstva/create', [LekarstvaController::class, 'create']);
 Route::get('/water', [WaterController::class, 'index']);
 Route::get('/water/create', [WaterController::class, 'create']);
+
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [PostController::class, 'create']);
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+
+Route::post('/posts/create', [PostController::class, 'store'])->name('posts.store');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.delete');
+
 Route::get('/posts/update', [PostController::class, 'update']);
 Route::get('/posts/delete', [PostController::class, 'delete']);
 Route::get('/posts/first_or_create', [PostController::class, 'firstOrCreate']);
@@ -45,3 +53,7 @@ Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.in
 Route::get('/main', [MainController::class, 'index'])->name('main.index');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

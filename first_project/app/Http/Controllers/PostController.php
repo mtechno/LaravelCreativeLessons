@@ -10,64 +10,64 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('posts', compact('posts'));
+        return view('posts.index', compact('posts'));
 //        dump($posts);
-//        foreach($posts as $post)
+//        foreach($posts as $posts)
 //        {
-//            dump($post->image);
+//            dump($posts->image);
 //        }
-//        $post = Post::where('likes', 100)->first();
-//        dump($post);
-////       $post = Post::where('is_published', 0)->first();
-////       dump($post->title);
+//        $posts = Post::where('likes', 100)->first();
+//        dump($posts);
+////       $posts = Post::where('is_published', 0)->first();
+////       dump($posts->title);
 //       dd('end');
 
     }
 
     public function create()
     {
-        $postsArr = [
-            [
-                'title' => 'title of post',
-                'post_content' => 'content of post',
-                'likes' => 100,
-                'image' => 'image.jpg',
-                'is_published' => 1,
-            ],
-            [
-                'title' => 'another title of post',
-                'post_content' => 'another content of post',
-                'likes' => 200,
-                'image' => 'another_image.jpg',
-                'is_published' => 1,
-            ],
-        ];
-        foreach ($postsArr as $item) {
-            Post::create($item);
-        }
-        dd('posts created succesfully');
+        return view('posts.create');
     }
 
-    public function update()
+    public function store()
     {
-        $post = Post::find(6);
-        $post->update([
-           'title' => 'updated',
-           'content' => 'updated',
-           'image' => 'updated',
-           'likes' => 110000,
-           'is_published' => 0,
+        $data = \request()->validate([
+            'title' => 'string|required',
+            'content' => 'string|required',
+            'image' => 'string|required',
+
         ]);
+        Post::create($data);
+        return redirect()->route('posts.index');
+    }
 
-        dd('posts updated succesfully');
+    public function show(Post $post)
+    {
+        return view('posts.show', compact('post'));
+    }
 
+    public function edit(Post $post)
+    {
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Post $post)
+    {
+        $data = \request()->validate([
+            'title' => 'string|required',
+            'content' => 'string|required',
+            'image' => 'string|required',
+
+        ]);
+        $post->update($data);
+        return redirect()->route('posts.show', $post->id);
     }
 
     public function delete()
     {
         $post = Post::withTrashed()->find(2);
         $post->restore();
-//        $post->delete([
+//        $posts->delete([
 //            'title' => 'updated',
 //            'content' => 'updated',
 //            'image' => 'updated',
@@ -76,6 +76,12 @@ class PostController extends Controller
 //        ]);
         dd('posts deleted succesfully');
     }
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return redirect()->route('posts.index');
+    }
+
     //firstOrCreate
     //updateOrCreate
 
@@ -89,7 +95,7 @@ class PostController extends Controller
             'likes' => 11999,
             'is_published' => 0,
          ];
-//        dump($post->content);
+//        dump($posts->content);
          Post::firstOrCreate([
             'title' => 'some title',
         ],
@@ -114,7 +120,7 @@ class PostController extends Controller
             'likes' => 11124,
             'is_published' => 0,
         ];
-//        dump($post->content);
+//        dump($posts->content);
         Post::updateOrCreate([
             'title' => 'some title',
         ],

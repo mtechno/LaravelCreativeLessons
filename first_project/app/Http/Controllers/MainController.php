@@ -12,14 +12,14 @@ class MainController extends Controller
         $posts = Post::all();
         return view('main');
 //        dump($posts);
-//        foreach($posts as $post)
+//        foreach($posts as $posts)
 //        {
-//            dump($post->image);
+//            dump($posts->image);
 //        }
-//        $post = Post::where('likes', 100)->first();
-//        dump($post);
-////       $post = Post::where('is_published', 0)->first();
-////       dump($post->title);
+//        $posts = Post::where('likes', 100)->first();
+//        dump($posts);
+////       $posts = Post::where('is_published', 0)->first();
+////       dump($posts->title);
 //       dd('end');
 
     }
