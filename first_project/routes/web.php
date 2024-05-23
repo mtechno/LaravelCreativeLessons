@@ -47,7 +47,6 @@ Route::get('/water/create', [WaterController::class, 'create']);
 Route::group(['namespace'=>'App\Http\Controllers\Post'], function (){
     Route::get('/posts', 'IndexController')->name('posts.index');
     Route::get('/posts/create', 'CreateController')->name('posts.create');
-
     Route::post('/posts/create', 'StoreController')->name('posts.store');
     Route::get('/posts/{post}', 'ShowController')->name('posts.show');
     Route::get('/posts/{post}/edit', 'EditController')->name('posts.edit');
