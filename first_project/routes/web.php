@@ -3,15 +3,23 @@
 use App\Http\Controllers\{AboutController,
     ContactsController,
     FishController,
+    FlakesController,
     KolbasaController,
     KrossovkiController,
     LekarstvaController,
     MainController,
     MilkController,
-    WaterController,
     MyPlaceController,
-    FlakesController,
-    PostController};
+    Post\CreateController,
+    Post\DestroyController,
+    Post\EditController,
+    Post\IndexController,
+    Post\ShowController,
+    Post\StoreController,
+    Post\UpdateController,
+    PostController,
+    WaterController};
+
 // use Illuminate\Support\Facades\Route;
 
 
@@ -34,19 +42,25 @@ Route::get('/lekarstva/create', [LekarstvaController::class, 'create']);
 Route::get('/water', [WaterController::class, 'index']);
 Route::get('/water/create', [WaterController::class, 'create']);
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
-Route::post('/posts/create', [PostController::class, 'store'])->name('posts.store');
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.delete');
+//Route::get('/posts', [IndexController::class])->name('posts.index');
+Route::group(['namespace'=>'App\Http\Controllers\Post'], function (){
+    Route::get('/posts', 'IndexController')->name('posts.index');
+    Route::get('/posts/create', 'CreateController')->name('posts.create');
 
-Route::get('/posts/update', [PostController::class, 'update']);
-Route::get('/posts/delete', [PostController::class, 'delete']);
-Route::get('/posts/first_or_create', [PostController::class, 'firstOrCreate']);
-Route::get('/posts/update_or_create', [PostController::class, 'updateOrCreate']);
+    Route::post('/posts/create', 'StoreController')->name('posts.store');
+    Route::get('/posts/{post}', 'ShowController')->name('posts.show');
+    Route::get('/posts/{post}/edit', 'EditController')->name('posts.edit');
+    Route::patch('/posts/{post}', 'UpdateController')->name('posts.update');
+    Route::delete('/posts/{post}', 'DestroyController')->name('posts.delete');
+
+//    Route::get('/posts/update', [PostController::class, 'update']);
+//    Route::get('/posts/delete', [PostController::class, 'delete']);
+//    Route::get('/posts/first_or_create', [PostController::class, 'firstOrCreate']);
+//    Route::get('/posts/update_or_create', [PostController::class, 'updateOrCreate']);
+});
+
+
 
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
@@ -56,4 +70,4 @@ Route::get('/main', [MainController::class, 'index'])->name('main.index');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

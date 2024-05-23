@@ -1,8 +1,8 @@
 @extends('layouts.main')
 @section('content')
     <div>
-            <div>{{$post->id}}. {{$post->title}}</div>
-            <div>{{$post->content}} {{$post->image}}</div>
+        <div>{{$post->id}}. {{$post->title}}</div>
+        <div>{{$post->content}} {{$post->image}}</div>
     </div>
     <div>
         <a href="{{route('posts.edit', $post->id)}}">Edit</a>
