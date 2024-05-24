@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Post;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Post\BaseController;
 
-class CreateController extends Controller
+class CreateController extends BaseController
 {
     public function __invoke()
     {

@@ -4,6 +4,7 @@ use App\Http\Controllers\{AboutController,
     ContactsController,
     FishController,
     FlakesController,
+    HomeController,
     KolbasaController,
     KrossovkiController,
     LekarstvaController,
@@ -24,6 +25,7 @@ use App\Http\Controllers\{AboutController,
 
 
 //Route::get('/fish/{ff}', [FishController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/my_page', [MyPlaceController::class,'index']);
 Route::get('/my_page/create', [MyPlaceController::class,'create']);
 Route::get('/kolbasa', [KolbasaController::class,'index']);
@@ -43,7 +45,7 @@ Route::get('/water', [WaterController::class, 'index']);
 Route::get('/water/create', [WaterController::class, 'create']);
 
 
-//Route::get('/posts', [IndexController::class])->name('posts.index');
+//Route::get('/posts', [PostController::class])->name('posts.index');
 Route::group(['namespace'=>'App\Http\Controllers\Post'], function (){
     Route::get('/posts', 'IndexController')->name('posts.index');
     Route::get('/posts/create', 'CreateController')->name('posts.create');
@@ -70,3 +72,7 @@ Route::get('/main', [MainController::class, 'index'])->name('main.index');
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
