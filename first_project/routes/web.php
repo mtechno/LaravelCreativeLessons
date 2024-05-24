@@ -14,7 +14,7 @@ use App\Http\Controllers\{AboutController,
     Post\CreateController,
     Post\DestroyController,
     Post\EditController,
-    Post\IndexController,
+    Admin\Post\IndexController,
     Post\ShowController,
     Post\StoreController,
     Post\UpdateController,
@@ -22,6 +22,9 @@ use App\Http\Controllers\{AboutController,
     WaterController};
 
 // use Illuminate\Support\Facades\Route;
+
+// тут мидлвары веба, сам поищи
+
 
 
 //Route::get('/fish/{ff}', [FishController::class, 'index']);
@@ -44,14 +47,25 @@ Route::get('/lekarstva/create', [LekarstvaController::class, 'create']);
 Route::get('/water', [WaterController::class, 'index']);
 Route::get('/water/create', [WaterController::class, 'create']);
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin','middleware' => 'admin'], function () {
+Route::group(['namespace' => 'admin', 'prefix' => 'admin','middleware' => 'admin'], function () {
     Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
 });
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
+    Route::group(['namespace' => 'Post'], function () {
+        Route::get('/post', 'IndexController')->name('admin.post.index');
+    });
+});
+
 //Route::get('/posts', [PostController::class])->name('posts.index');
 Route::group(['namespace'=>'App\Http\Controllers\Post'], function (){
     Route::get('/posts', 'IndexController')->name('posts.index');
     Route::get('/posts/create', 'CreateController')->name('posts.create');
-    Route::post('/posts/create', 'StoreController')->name('posts.store');
+    Route::post('/posts/create', 'StoreController')->name('posts.store')
+        //->withoutMiddleware(['web'])
+        // ->middleware(['api'])
+    ;
+
+
     Route::get('/posts/{post}', 'ShowController')->name('posts.show');
     Route::get('/posts/{post}/edit', 'EditController')->name('posts.edit');
     Route::patch('/posts/{post}', 'UpdateController')->name('posts.update');
@@ -63,11 +77,15 @@ Route::group(['namespace'=>'App\Http\Controllers\Post'], function (){
 //    Route::get('/posts/update_or_create', [PostController::class, 'updateOrCreate']);
 });
 
+// в 11 версии по другому
+
+
 
 
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
 Route::get('/main', [MainController::class, 'index'])->name('main.index');
+
 
 
 

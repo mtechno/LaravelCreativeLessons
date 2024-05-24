@@ -9,7 +9,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+//        $posts = Post::all();
         return view('main');
 //        dump($posts);
 //        foreach($posts as $posts)
