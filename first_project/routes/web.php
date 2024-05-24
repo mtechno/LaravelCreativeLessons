@@ -25,7 +25,7 @@ use App\Http\Controllers\{AboutController,
 
 
 //Route::get('/fish/{ff}', [FishController::class, 'index']);
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/my_page', [MyPlaceController::class,'index']);
 Route::get('/my_page/create', [MyPlaceController::class,'create']);
 Route::get('/kolbasa', [KolbasaController::class,'index']);
@@ -44,7 +44,9 @@ Route::get('/lekarstva/create', [LekarstvaController::class, 'create']);
 Route::get('/water', [WaterController::class, 'index']);
 Route::get('/water/create', [WaterController::class, 'create']);
 
-
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin','middleware' => 'admin'], function () {
+    Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
+});
 //Route::get('/posts', [PostController::class])->name('posts.index');
 Route::group(['namespace'=>'App\Http\Controllers\Post'], function (){
     Route::get('/posts', 'IndexController')->name('posts.index');
